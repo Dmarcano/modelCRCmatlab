@@ -1,2 +1,2 @@
 # modelCRCmatlab
-A CRC model in Matlab for summer research.
+A Colorectal Cancer Model in Matlab.
