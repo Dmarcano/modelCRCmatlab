@@ -7,7 +7,7 @@ classdef Person < handle
       range
       history
       status
-      health_history
+      colon
       p5Progression
       crcProgression
    end
@@ -28,7 +28,7 @@ classdef Person < handle
             obj.history = history;
             obj.status = 'H';
             obj.range = 'Undefined';
-            obj.health_history = [];
+            obj.colon = Colon(age);
             obj.p5Progression = [];
             obj.crcProgression = [];
             end
@@ -56,6 +56,7 @@ classdef Person < handle
         function polypProgression(obj)
             notify(obj,"polypFormation")
         end
+        
         function obj = calcRange(obj)
             if obj.age >= 40 && obj.age <= 49
                 obj.range = 'A';

@@ -52,12 +52,14 @@ C0HcancerProb = containers.Map( {'P','S','L','R'} , {0.025, 0.25, 0.2, 0.65});
 C1HcancerProb = containers.Map({'P','S','L','R'},  {0.045, 0.25, 0.2, 0.65} );
 CcancerProb = containers.Map({0,1},{C0HcancerProb,C1HcancerProb});
 
-Af0HcancerProb = containers.Map();
-Af1HcancerProb = containers.Map();
+Af0HcancerProb = containers.Map( {'P','S','L','R'},{0.02,0.26,0.25,0.67} );
+Af1HcancerProb = containers.Map( {'P','S','L','R'},{0.04,0.26,0.25,0.68 } );
 AfcancerProb = containers.Map({0,1}, { Af0HcancerProb,Af1HcancerProb }  );
 
 
-AllcancerProb = containers.Map(  );
+All1HcancerProb = containers.Map( {'P','S','L','R'}, {0.04,0.25,0.18,0.65  } );
+All0HcancerProb = containers.Map( {'P','S','L','R'}, { 0.02,0.25,0.18,0.65 }  );
+AllcancerProb = containers.Map({0,1},{All0HcancerProb, All1HcancerProb}  );
 
 canProbs = containers.Map({'Caucasian','African American','All'},{CcancerProb,AfcancerProb,AllcancerProb});
 
