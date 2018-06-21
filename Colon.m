@@ -2,8 +2,8 @@ classdef Colon < handle
     %A colon class that stores specific information regarding the state of
     %a colon for each person object. It stores data such as the time a
     %person develops a specific instance of cancer and 
-    properties
-        status
+    properties (SetAccess = private)
+        
         lastChecked
         initialTime
         polypTime
@@ -14,18 +14,22 @@ classdef Colon < handle
         deathTime
         
     end
+    
+    properties
+        status
+    end
     methods
         % ============== CONSTRUCTOR =============
         function obj = Colon(age)
             if nargin > 0
                 obj.status = 'H';
                 obj.initialTime = age;
-                obj.polypTime = NaN;
-                obj.inSituTime = NaN;
-                obj.localTime = NaN;
-                obj.regionalTime = NaN;
-                obj.distantTime = NaN;
-                obj.deathTime = NaN;
+                obj.polypTime = 0;
+                obj.inSituTime = 0;
+                obj.localTime = 0;
+                obj.regionalTime = 0;
+                obj.distantTime = 0;
+                obj.deathTime = 0;
             end
         end
         
@@ -67,7 +71,30 @@ classdef Colon < handle
         end
         
         %================ GETTERS =============
-            
+        function time = getP5Time(obj)
+            time = obj.polypTime;
+        end
+        
+         function time = getSTime(obj)
+            time = obj.inSituTime;
+         end
+         
+         function time = getLTime(obj)
+            time = obj.localTime;
+         end
+        
+          function time = getRTime(obj)
+            time = obj.regionalTime;
+          end
+        
+           function time = getDTime(obj)
+            time = obj.distantTime;
+           end
+           
+         function time = getDeathTime(obj)
+            time = obj.deathTime;
+         end
+        
         
     end
     

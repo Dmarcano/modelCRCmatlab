@@ -9,20 +9,45 @@ classdef LinkedList < handle
     end
     
     methods
-        function obj = LinkedList()
-           obj.head = Node(); 
+        function obj = LinkedList(data)
+            if nargin > 0
+             obj.head = Node(data);
+             obj.tail = obj.head.next;
+             obj.size = 1;
+            else
+              obj.head = Node();
+              obj.tail = obj.head.next;
+              obj.size = 0;
+            end
+            
         end
         
         function append(obj, data)
             new_node = Node(data);
+            if obj.size == 0
+                obj.head.data = data;
+            
+            elseif obj.size < 2
             current = obj.head;
             
             while current.next ~= 'None'
                 current = current.next;
                 
             end
+            
             current.next = new_node;
+            obj.tail = new_node;
+            obj.tail.previous = current;
+            
+            else
+                obj.tail.next = new_node;
+                obj.tail.next.previous = obj.tail;
+                obj.tail = obj.tail.next;
+            end
+            obj.size = obj.size + 1;
         end
+        
+        
         
         function length = length(obj)
             current = obj.head;
@@ -50,7 +75,6 @@ classdef LinkedList < handle
         end
         
         function data =  getData(obj,index)
-            obj.length();
             if index > obj.size
                 str = 'ERROR Index out of range';
                 str
@@ -58,6 +82,11 @@ classdef LinkedList < handle
                 return
             end
             
+            if index == 1
+                data = obj.head.data;
+            elseif index == obj.size
+                data = obj.tail.data;
+            else
             cur_idx = 1;
             current = obj.head;
             running = true;
@@ -72,7 +101,71 @@ classdef LinkedList < handle
                end
             end
             
+            end
             
+        end
+        
+        function dataSet = getDataset(obj,someFunction)
+             tempSet(1, obj.size) = zeros;
+             current_node = obj.head;
+             i = 1;
+            if nargin > 1
+                while current_node.next ~= 'None'
+                    data = someFunction(current_node.data);                
+                    tempSet(i) = data;
+                    current_node = current_node.next;
+                    i = i + 1;
+                end
+                
+            else
+                while current_node.next ~= 'None'
+                tempSet(i) = current_node.data;
+                current_node = current_node.next;
+                i = i + 1; 
+                 
+                end  
+            end
+            
+            if nargin > 1
+               tempSet(obj.size) = someFunction(obj.tail.data);
+           else
+               tempSet(obj.size) = obj.tail.data;
+            end
+           
+            filterSet = tempSet > 0;
+            dataSet = tempSet(filterSet);
+        end
+        
+        function erase(obj,index)
+            cur_idx = 1;
+            current_node = self.head;
+            length = obj.size;
+            running = true;
+            if index > length
+               str = 'index Error'
+               return
+            end
+            
+            while running
+                last_node = current_node;
+                current_node = last_node.next;
+                if index == cur_idx
+                    last_node.next = current_node.next;
+                    running = false;
+                else
+                    cur_idx = cur_idx + 1 ;
+                end
+            end
+            
+            
+        end
+        
+        function eraseNode(obj,node)
+            previousNode = node.previous;
+            nextNode = node.next;
+            
+            nextNode.previous = previousNode;
+            previousNode.next = NextNode;
         end
     end
     

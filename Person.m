@@ -26,6 +26,7 @@ classdef Person < handle
       colon
       p5Progression
       crcProgression
+      
    end
    
     methods
@@ -91,6 +92,25 @@ classdef Person < handle
             cancerProbs = obj.crcProgression(obj.status);
         end
        
+
+        
+        function p5Time = getP5Time(obj)
+          p5Time = obj.colon.getP5Time();
+        end
+        
+        function STime = getSTime(obj)
+          STime = obj.colon.getSTime();
+        end
+        function LTime = getLTime(obj)
+          LTime = obj.colon.getLTime();
+        end
+        
+        function RTime = getRTime(obj)
+          RTime = obj.colon.getRTime();
+        end
+        function DTime = getDTime(obj)
+          DTime = obj.colon.getDTime();
+        end
         
         
         %================== EVENTS =============== 
